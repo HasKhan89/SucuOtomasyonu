@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5aca20da65674df0966ccbf199ec89a4" Name="Diagram1" >
+        <EntityTypeShape EntityType="winEFModelFirst.Musteri" Width="2" PointX="0.625" PointY="0.5" />
+        <EntityTypeShape EntityType="winEFModelFirst.Hediye" Width="1.5" PointX="5.875" PointY="0.5" />
+        <EntityTypeShape EntityType="winEFModelFirst.Marka" Width="1.5" PointX="8.375" PointY="2.875" />
+        <EntityTypeShape EntityType="winEFModelFirst.Stok" Width="1.5" PointX="5.875" PointY="2.875" />
+        <AssociationConnector Association="winEFModelFirst.MarkaStok" />
+        <EntityTypeShape EntityType="winEFModelFirst.Siparis" Width="1.5" PointX="3.375" PointY="2.875" />
+        <AssociationConnector Association="winEFModelFirst.MusteriSiparis" />
+        <AssociationConnector Association="winEFModelFirst.StokSiparis" />
+        <EntityTypeShape EntityType="winEFModelFirst.Fatura" Width="1.5" PointX="0.625" PointY="4.5" />
+        <AssociationConnector Association="winEFModelFirst.FaturaSiparis" />
+        <AssociationConnector Association="winEFModelFirst.MusteriHediye" />
+        <EntityTypeShape EntityType="winEFModelFirst.Log" Width="1.5" PointX="8.375" PointY="5.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

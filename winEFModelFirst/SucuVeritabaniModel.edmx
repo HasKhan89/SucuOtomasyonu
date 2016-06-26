@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="winEFModelFirst.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="winEFModelFirstStoreContainer">
+    <EntitySet Name="Musteri" EntityType="winEFModelFirst.Store.Musteri" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hediye" EntityType="winEFModelFirst.Store.Hediye" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Marka" EntityType="winEFModelFirst.Store.Marka" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stok" EntityType="winEFModelFirst.Store.Stok" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Siparis" EntityType="winEFModelFirst.Store.Siparis" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fatura" EntityType="winEFModelFirst.Store.Fatura" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Log" EntityType="winEFModelFirst.Store.Log" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="MarkaStok" Association="winEFModelFirst.Store.MarkaStok">
+      <End Role="Marka" EntitySet="Marka" />
+      <End Role="Stok" EntitySet="Stok" />
+    </AssociationSet>
+    <AssociationSet Name="MusteriSiparis" Association="winEFModelFirst.Store.MusteriSiparis">
+      <End Role="Musteri" EntitySet="Musteri" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="StokSiparis" Association="winEFModelFirst.Store.StokSiparis">
+      <End Role="Stok" EntitySet="Stok" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="FaturaSiparis" Association="winEFModelFirst.Store.FaturaSiparis">
+      <End Role="Fatura" EntitySet="Fatura" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+    <AssociationSet Name="MusteriHediye" Association="winEFModelFirst.Store.MusteriHediye">
+      <End Role="Musteri" EntitySet="Musteri" />
+      <End Role="Hediye" EntitySet="Hediye" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="Soyadi" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Telefonu" Type="nchar" Nullable="false" MaxLength="12" />
+    <Property Name="Adresi" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="KayitTarihi" Type="datetime" Nullable="true" />
+    <Property Name="SonIstekteBulunmaTarihi" Type="datetime" Nullable="true" />
+    <Property Name="ToplamSiparisSayisi" Type="bigint" Nullable="false" />
+    <Property Name="ToplamPuani" Type="bigint" Nullable="true" />
+    <Property Name="VIP" Type="bit" Nullable="false" />
+    <Property Name="BireyselMi" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="VergiNo" Type="bigint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Hediye">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="PiyasaDegeri" Type="decimal" Nullable="true" Precision="5" Scale="2" />
+    <Property Name="Puani" Type="bigint" Nullable="true" />
+    <Property Name="Musteri_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="FirmaAdi" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="FirmaEPosta" Type="nvarchar" Nullable="true" MaxLength="254" />
+  </EntityType>
+  <EntityType Name="Stok">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Turu" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Adedi" Type="bigint" Nullable="false" />
+    <Property Name="PerakendeFiyati" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="ToptanFiyati" Type="decimal" Nullable="true" Precision="6" Scale="2" />
+    <Property Name="Marka_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Siparis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarihi" Type="datetime" Nullable="false" />
+    <Property Name="Adedi" Type="bigint" Nullable="false" DefaultValue="1" />
+    <Property Name="PerakendeMi" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="ToplamTutar" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Musteri_Id" Type="int" Nullable="false" />
+    <Property Name="Stok_Id" Type="int" Nullable="false" />
+    <Property Name="Fatura_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fatura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="KesimTarihi" Type="datetime" Nullable="false" />
+    <Property Name="ToplamTutar" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="KDVOrani" Type="decimal" Nullable="false" Precision="4" Scale="3" />
+    <Property Name="IskontoOrani" Type="decimal" Nullable="false" Precision="4" Scale="3" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="LogDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Segment" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Detail" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="MarkaStok">
+    <End Role="Marka" Type="winEFModelFirst.Store.Marka" Multiplicity="1" />
+    <End Role="Stok" Type="winEFModelFirst.Store.Stok" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stok">
+        <PropertyRef Name="Marka_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MusteriSiparis">
+    <End Role="Musteri" Type="winEFModelFirst.Store.Musteri" Multiplicity="1" />
+    <End Role="Siparis" Type="winEFModelFirst.Store.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="Musteri_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StokSiparis">
+    <End Role="Stok" Type="winEFModelFirst.Store.Stok" Multiplicity="1" />
+    <End Role="Siparis" Type="winEFModelFirst.Store.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stok">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="Stok_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FaturaSiparis">
+    <End Role="Fatura" Type="winEFModelFirst.Store.Fatura" Multiplicity="1" />
+    <End Role="Siparis" Type="winEFModelFirst.Store.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fatura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="Fatura_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MusteriHediye">
+    <End Role="Musteri" Type="winEFModelFirst.Store.Musteri" Multiplicity="1" />
+    <End Role="Hediye" Type="winEFModelFirst.Store.Hediye" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hediye">
+        <PropertyRef Name="Musteri_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="winEFModelFirst" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SucuVeritabaniEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Musteri" EntityType="winEFModelFirst.Musteri" />
+          <EntitySet Name="Hediye" EntityType="winEFModelFirst.Hediye" />
+          <EntitySet Name="Marka" EntityType="winEFModelFirst.Marka" />
+          <EntitySet Name="Stok" EntityType="winEFModelFirst.Stok" />
+          <AssociationSet Name="MarkaStok" Association="winEFModelFirst.MarkaStok">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <EntitySet Name="Siparis" EntityType="winEFModelFirst.Siparis" />
+          <AssociationSet Name="MusteriSiparis" Association="winEFModelFirst.MusteriSiparis">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="StokSiparis" Association="winEFModelFirst.StokSiparis">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <EntitySet Name="Fatura" EntityType="winEFModelFirst.Fatura" />
+          <AssociationSet Name="FaturaSiparis" Association="winEFModelFirst.FaturaSiparis">
+            <End Role="Fatura" EntitySet="Fatura" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="MusteriHediye" Association="winEFModelFirst.MusteriHediye">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Hediye" EntitySet="Hediye" />
+          </AssociationSet>
+          <EntitySet Name="Log" EntityType="winEFModelFirst.Log" />
+        </EntityContainer>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" Nullable="false" Unicode="true" MaxLength="15" />
+          <Property Name="Soyadi" Type="String" Nullable="false" MaxLength="20" Unicode="true" />
+          <Property Name="Telefonu" Type="String" Nullable="false" FixedLength="true" MaxLength="12" />
+          <Property Name="Adresi" Type="String" Nullable="false" Unicode="true" MaxLength="250" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="true" />
+          <Property Name="SonIstekteBulunmaTarihi" Type="DateTime" Nullable="true" />
+          <Property Name="ToplamSiparisSayisi" Type="Int64" Nullable="false" />
+          <Property Name="ToplamPuani" Type="Int64" Nullable="true" />
+          <Property Name="VIP" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Siparis" Relationship="winEFModelFirst.MusteriSiparis" FromRole="Musteri" ToRole="Siparis" />
+          <Property Name="BireyselMi" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="VergiNo" Type="Int64" Nullable="true" />
+          <NavigationProperty Name="Hediye" Relationship="winEFModelFirst.MusteriHediye" FromRole="Musteri" ToRole="Hediye" />
+        </EntityType>
+        <EntityType Name="Hediye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" Nullable="false" Unicode="true" MaxLength="30" />
+          <Property Name="PiyasaDegeri" Type="Decimal" Scale="2" Precision="5" Nullable="true" />
+          <Property Name="Puani" Type="Int64" Nullable="true" />
+          <NavigationProperty Name="Musteri" Relationship="winEFModelFirst.MusteriHediye" FromRole="Hediye" ToRole="Musteri" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" Nullable="false" Unicode="true" MaxLength="25" />
+          <NavigationProperty Name="Stok" Relationship="winEFModelFirst.MarkaStok" FromRole="Marka" ToRole="Stok" />
+          <Property Name="FirmaAdi" Type="String" Unicode="true" MaxLength="50" Nullable="true" />
+          <Property Name="FirmaEPosta" Type="String" MaxLength="254" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Turu" Type="String" Nullable="false" MaxLength="50" Unicode="true" />
+          <Property Name="Adedi" Type="Int64" Nullable="false" />
+          <Property Name="PerakendeFiyati" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="ToptanFiyati" Type="Decimal" Scale="2" Precision="6" Nullable="true" />
+          <NavigationProperty Name="Marka" Relationship="winEFModelFirst.MarkaStok" FromRole="Stok" ToRole="Marka" />
+          <NavigationProperty Name="Siparis" Relationship="winEFModelFirst.StokSiparis" FromRole="Stok" ToRole="Siparis" />
+        </EntityType>
+        <Association Name="MarkaStok">
+          <End Type="winEFModelFirst.Marka" Role="Marka" Multiplicity="1" />
+          <End Type="winEFModelFirst.Stok" Role="Stok" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tarihi" Type="DateTime" Nullable="false" />
+          <Property Name="Adedi" Type="Int64" Nullable="false" DefaultValue="1" />
+          <NavigationProperty Name="Musteri" Relationship="winEFModelFirst.MusteriSiparis" FromRole="Siparis" ToRole="Musteri" />
+          <NavigationProperty Name="Stok" Relationship="winEFModelFirst.StokSiparis" FromRole="Siparis" ToRole="Stok" />
+          <Property Name="PerakendeMi" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="ToplamTutar" Type="Decimal" Nullable="false" Scale="2" Precision="6" />
+          <NavigationProperty Name="Fatura" Relationship="winEFModelFirst.FaturaSiparis" FromRole="Siparis" ToRole="Fatura" />
+        </EntityType>
+        <Association Name="MusteriSiparis">
+          <End Type="winEFModelFirst.Musteri" Role="Musteri" Multiplicity="1" />
+          <End Type="winEFModelFirst.Siparis" Role="Siparis" Multiplicity="*" />
+        </Association>
+        <Association Name="StokSiparis">
+          <End Type="winEFModelFirst.Stok" Role="Stok" Multiplicity="1" />
+          <End Type="winEFModelFirst.Siparis" Role="Siparis" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="KesimTarihi" Type="DateTime" Nullable="false" />
+          <Property Name="ToplamTutar" Type="Decimal" Nullable="false" Scale="2" Precision="6" />
+          <Property Name="KDVOrani" Type="Decimal" Nullable="false" Scale="3" Precision="4" />
+          <Property Name="IskontoOrani" Type="Decimal" Nullable="false" Scale="3" Precision="4" />
+          <NavigationProperty Name="Siparis" Relationship="winEFModelFirst.FaturaSiparis" FromRole="Fatura" ToRole="Siparis" />
+        </EntityType>
+        <Association Name="FaturaSiparis">
+          <End Type="winEFModelFirst.Fatura" Role="Fatura" Multiplicity="1" />
+          <End Type="winEFModelFirst.Siparis" Role="Siparis" Multiplicity="*" />
+        </Association>
+        <Association Name="MusteriHediye">
+          <End Type="winEFModelFirst.Musteri" Role="Musteri" Multiplicity="1" />
+          <End Type="winEFModelFirst.Hediye" Role="Hediye" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="25" Unicode="true" />
+          <Property Name="LogDateTime" Type="DateTime" Nullable="false" />
+          <Property Name="Segment" Type="String" Nullable="false" MaxLength="50" Unicode="true" />
+          <Property Name="Detail" Type="String" Nullable="false" MaxLength="100" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="winEFModelFirstStoreContainer" CdmEntityContainer="SucuVeritabaniEntities">
+    <EntitySetMapping Name="Musteri">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Musteri)">
+        <MappingFragment StoreEntitySet="Musteri">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Adi" ColumnName="Adi" />
+          <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+          <ScalarProperty Name="Telefonu" ColumnName="Telefonu" />
+          <ScalarProperty Name="Adresi" ColumnName="Adresi" />
+          <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+          <ScalarProperty Name="SonIstekteBulunmaTarihi" ColumnName="SonIstekteBulunmaTarihi" />
+          <ScalarProperty Name="ToplamSiparisSayisi" ColumnName="ToplamSiparisSayisi" />
+          <ScalarProperty Name="ToplamPuani" ColumnName="ToplamPuani" />
+          <ScalarProperty Name="VIP" ColumnName="VIP" />
+          <ScalarProperty Name="BireyselMi" ColumnName="BireyselMi" />
+          <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hediye">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Hediye)">
+        <MappingFragment StoreEntitySet="Hediye">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Adi" ColumnName="Adi" />
+          <ScalarProperty Name="PiyasaDegeri" ColumnName="PiyasaDegeri" />
+          <ScalarProperty Name="Puani" ColumnName="Puani" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marka">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Marka)">
+        <MappingFragment StoreEntitySet="Marka">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Adi" ColumnName="Adi" />
+          <ScalarProperty Name="FirmaAdi" ColumnName="FirmaAdi" />
+          <ScalarProperty Name="FirmaEPosta" ColumnName="FirmaEPosta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stok">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Stok)">
+        <MappingFragment StoreEntitySet="Stok">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Turu" ColumnName="Turu" />
+          <ScalarProperty Name="Adedi" ColumnName="Adedi" />
+          <ScalarProperty Name="PerakendeFiyati" ColumnName="PerakendeFiyati" />
+          <ScalarProperty Name="ToptanFiyati" ColumnName="ToptanFiyati" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Siparis">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Siparis)">
+        <MappingFragment StoreEntitySet="Siparis">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tarihi" ColumnName="Tarihi" />
+          <ScalarProperty Name="Adedi" ColumnName="Adedi" />
+          <ScalarProperty Name="PerakendeMi" ColumnName="PerakendeMi" />
+          <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fatura">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Fatura)">
+        <MappingFragment StoreEntitySet="Fatura">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="KesimTarihi" ColumnName="KesimTarihi" />
+          <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+          <ScalarProperty Name="KDVOrani" ColumnName="KDVOrani" />
+          <ScalarProperty Name="IskontoOrani" ColumnName="IskontoOrani" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Log">
+      <EntityTypeMapping TypeName="IsTypeOf(winEFModelFirst.Log)">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+          <ScalarProperty Name="Segment" ColumnName="Segment" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MarkaStok" TypeName="winEFModelFirst.MarkaStok" StoreEntitySet="Stok">
+      <EndProperty Name="Marka">
+        <ScalarProperty Name="Id" ColumnName="Marka_Id" />
+      </EndProperty>
+      <EndProperty Name="Stok">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MusteriSiparis" TypeName="winEFModelFirst.MusteriSiparis" StoreEntitySet="Siparis">
+      <EndProperty Name="Musteri">
+        <ScalarProperty Name="Id" ColumnName="Musteri_Id" />
+      </EndProperty>
+      <EndProperty Name="Siparis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StokSiparis" TypeName="winEFModelFirst.StokSiparis" StoreEntitySet="Siparis">
+      <EndProperty Name="Stok">
+        <ScalarProperty Name="Id" ColumnName="Stok_Id" />
+      </EndProperty>
+      <EndProperty Name="Siparis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FaturaSiparis" TypeName="winEFModelFirst.FaturaSiparis" StoreEntitySet="Siparis">
+      <EndProperty Name="Fatura">
+        <ScalarProperty Name="Id" ColumnName="Fatura_Id" />
+      </EndProperty>
+      <EndProperty Name="Siparis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MusteriHediye" TypeName="winEFModelFirst.MusteriHediye" StoreEntitySet="Hediye">
+      <EndProperty Name="Musteri">
+        <ScalarProperty Name="Id" ColumnName="Musteri_Id" />
+      </EndProperty>
+      <EndProperty Name="Hediye">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

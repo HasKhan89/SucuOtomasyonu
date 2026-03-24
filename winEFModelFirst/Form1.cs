@@ -16,5 +16,13 @@ namespace winEFModelFirst
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            using (var db = new SucuVeritabaniEntities())
+            {
+                dataGridView1.DataSource = db.Musteri.ToList();
+            }
+        }
     }
 }

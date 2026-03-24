@@ -1,8 +1,4 @@
 C:\Users\HasKhan\Desktop\winEFModelFirst\winEFModelFirst\bin\Debug\winEFModelFirst.exe.config
-C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.AssemblyReference.cache
-C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.Properties.Resources.resources
-C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.GenerateResource.cache
-C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.CoreCompileInputs.cache
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\winEFModelFirst.exe.config
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\winEFModelFirst.exe
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\winEFModelFirst.pdb
@@ -10,6 +6,10 @@ C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\Ent
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\EntityFramework.xml
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.AssemblyReference.cache
+C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.Properties.Resources.resources
+C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.GenerateResource.cache
+C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.csproj.CoreCompileInputs.cache
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFMod.72636D58.Up2Date
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.exe
 C:\Users\hasankahraman\source\repos\SucuOtomasyonu\winEFModelFirst\obj\Debug\winEFModelFirst.pdb
